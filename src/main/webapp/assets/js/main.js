@@ -106,11 +106,39 @@ const EventCart = (function () {
         }, false);
     }
 
+    /**
+     * Updates the global navbar cart count badge.
+     */
+    function updateCartBadge(count) {
+        const badge = document.getElementById('cart-badge-count');
+        if (badge) {
+            const num = (count !== undefined && count !== null) ? count : 0;
+            badge.textContent = num;
+            badge.setAttribute('aria-label', num + ' items in cart');
+        }
+    }
+
+    /**
+     * Asynchronously refreshes the cart count from server.
+     */
+    async function refreshCartCount(contextPath = '') {
+        try {
+            const data = await request(`${contextPath}/cart/count`);
+            if (data && data.success && data.data) {
+                updateCartBadge(data.data.cartCount);
+            }
+        } catch (e) {
+            // Background check failure is non-blocking
+        }
+    }
+
     // Public API
     return {
         request,
         showNotification,
-        initFormValidation
+        initFormValidation,
+        updateCartBadge,
+        refreshCartCount
     };
 })();
 

@@ -1,8 +1,11 @@
 package com.eventcart.util;
 
 import com.eventcart.config.AppConfig;
+import com.eventcart.entity.Booking;
+import com.eventcart.entity.BookingItem;
 import com.eventcart.entity.Category;
 import com.eventcart.entity.Event;
+import com.eventcart.entity.Payment;
 import com.eventcart.entity.TicketType;
 import com.eventcart.entity.User;
 import org.hibernate.Session;
@@ -73,6 +76,9 @@ public final class HibernateUtil {
             sources.addAnnotatedClass(Category.class);
             sources.addAnnotatedClass(Event.class);
             sources.addAnnotatedClass(TicketType.class);
+            sources.addAnnotatedClass(Booking.class);
+            sources.addAnnotatedClass(BookingItem.class);
+            sources.addAnnotatedClass(Payment.class);
 
             Metadata metadata = sources.getMetadataBuilder().build();
             SessionFactory factory = metadata.getSessionFactoryBuilder().build();

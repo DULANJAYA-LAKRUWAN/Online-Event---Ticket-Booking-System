@@ -148,6 +148,7 @@ class TicketTypeServiceTest {
         @Override public List<TicketType> findAll() { return new ArrayList<>(db.values()); }
         @Override public List<TicketType> findPaginated(int page, int pageSize) { return findAll(); }
         @Override public long count() { return db.size(); }
+        @Override public Optional<TicketType> findByIdWithLock(org.hibernate.Session session, Long ticketTypeId) { return findById(ticketTypeId); }
     }
 
     static class MockEventDao implements EventDao {

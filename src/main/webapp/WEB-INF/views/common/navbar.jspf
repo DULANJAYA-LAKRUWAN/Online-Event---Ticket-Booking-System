@@ -43,9 +43,9 @@
             <ul class="navbar-nav align-items-lg-center">
                 <!-- Cart Icon with badge -->
                 <li class="nav-item me-lg-3 position-relative">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/#cart" title="Shopping Cart">
+                    <a class="nav-link ${pageActive == 'cart' ? 'active' : ''}" href="${pageContext.request.contextPath}/cart" title="Shopping Cart" id="nav-cart-btn">
                         <i class="bi bi-cart3 fs-5"></i>
-                        <span class="cart-badge">0</span>
+                        <span class="cart-badge" id="cart-badge-count"><c:out value="${sessionScope.EVENTCART_SESSION_CART != null ? sessionScope.EVENTCART_SESSION_CART.totalQuantity : 0}" /></span>
                     </a>
                 </li>
 

@@ -120,17 +120,15 @@
 
                                             <c:choose>
                                                 <c:when test="${tk.availableQuantity > 0}">
-                                                    <!-- Quantity Selector and Reserve / Add to Cart Placeholder -->
+                                                    <!-- Quantity Selector and AJAX Add to Cart -->
                                                     <div class="d-flex align-items-center gap-2">
-                                                        <select class="form-select form-select-sm" style="width: 70px;" id="qty-${tk.id}">
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                        </select>
-                                                        <button type="button" class="btn btn-primary-event btn-sm text-nowrap"
-                                                                onclick="handleAddToCart(${tk.id}, '${tk.name}', ${tk.price})">
+                                                        <div class="input-group input-group-sm" style="width: 110px;">
+                                                             <button class="btn btn-outline-secondary" type="button" aria-label="Decrease quantity" onclick="decrementQty(${tk.id})">&minus;</button>
+                                                             <input type="number" class="form-control text-center px-1" id="qty-${tk.id}" value="1" min="1" max="${tk.availableQuantity > 10 ? 10 : tk.availableQuantity}" aria-label="Quantity for ${tk.name}" readonly>
+                                                             <button class="btn btn-outline-secondary" type="button" aria-label="Increase quantity" onclick="incrementQty(${tk.id}, ${tk.availableQuantity > 10 ? 10 : tk.availableQuantity})">&plus;</button>
+                                                        </div>
+                                                        <button type="button" class="btn btn-primary-event btn-sm text-nowrap" id="btn-add-${tk.id}"
+                                                                onclick="handleAddToCart(${tk.id}, this)">
                                                             <i class="bi bi-cart-plus me-1"></i> Add to Cart
                                                         </button>
                                                     </div>
@@ -199,10 +197,64 @@
 </main>
 
 <script>
-    function handleAddToCart(ticketId, ticketName, price) {
-        const qtySelect = document.getElementById('qty-' + ticketId);
-        const qty = qtySelect ? qtySelect.value : 1;
-        EventCart.showNotification('Selected ' + qty + 'x ' + ticketName + ' ($' + (price * qty).toFixed(2) + '). Cart checkout will be completed in Phase 03.', 'info');
+    function decrementQty(ticketId) {
+        const input = document.getElementById('qty-' + ticketId);
+        if (!input) return;
+        let val = parseInt(input.value, 10);
+        if (isNaN(val) || val <= 1) return;
+        input.value = val - 1;
+    }
+
+    function incrementQty(ticketId, maxQty) {
+        const input = document.getElementById('qty-' + ticketId);
+        if (!input) return;
+        let val = parseInt(input.value, 10);
+        if (isNaN(val)) val = 1;
+        if (val < maxQty) {
+            input.value = val + 1;
+        }
+    }
+
+    async function handleAddToCart(ticketId, buttonEl) {
+        const input = document.getElementById('qty-' + ticketId);
+        const qty = input ? parseInt(input.value, 10) : 1;
+        if (isNaN(qty) || qty < 1) {
+            EventCart.showNotification('Please select a valid ticket quantity.', 'warning');
+            return;
+        }
+
+        const originalHtml = buttonEl.innerHTML;
+        buttonEl.disabled = true;
+        buttonEl.innerHTML = '<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span> Adding...';
+
+        try {
+            const formData = new URLSearchParams();
+            formData.append('ticketTypeId', ticketId);
+            formData.append('quantity', qty);
+
+            const res = await EventCart.request('${pageContext.request.contextPath}/cart/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            });
+
+            if (res && res.success) {
+                EventCart.updateCartBadge(res.data.cartCount);
+                EventCart.showNotification(
+                    'Added ' + qty + ' ticket' + (qty > 1 ? 's' : '') + ' to your cart! <a href="${pageContext.request.contextPath}/cart" class="text-white fw-bold text-decoration-underline ms-1">View Cart</a>',
+                    'success'
+                );
+            } else {
+                EventCart.showNotification(res.message || 'Failed to add ticket to cart.', 'error');
+            }
+        } catch (err) {
+            EventCart.showNotification(err.message || 'Error adding ticket to cart.', 'error');
+        } finally {
+            buttonEl.disabled = false;
+            buttonEl.innerHTML = originalHtml;
+        }
     }
 </script>
 

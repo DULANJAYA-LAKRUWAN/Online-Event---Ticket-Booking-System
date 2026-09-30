@@ -32,11 +32,11 @@
 | 9 | JSP + Servlets CRUD | Pure MVC: Servlets as Controllers, JSP for presentation, JSTL/EL rendering | Implemented |
 | 10 | Hibernate ORM | Hibernate ORM 6 with Jakarta Persistence 3.1, Singleton `HibernateUtil`, transaction management | Implemented |
 | 11 | MySQL 8 | Relational schema with InnoDB, foreign key constraints, indexes, UTF8MB4 charset | Implemented |
-| 12 | Shopping Cart | Session-backed ticket reservation cart with seat reservation counters | Phase 02 |
+| 12 | Shopping Cart | Session-backed ticket reservation cart with AJAX operations and badge | Implemented (Phase 03) |
 | 13 | Pagination | Server-side pagination query in `GenericDaoImpl` (`findPaginated`) | Implemented |
-| 14 | Advanced Search | Multi-parameter search (keyword, category, location, date range) | Foundation Ready |
-| 15 | File Uploader | Servlet Multipart config for banner images and receipts | Foundation Ready |
-| 16 | Payment Gateway | Mock sandbox payment workflow supporting payment status transitions | Foundation Ready |
+| 14 | Advanced Search | Multi-parameter search (keyword, category, location, date range) | Implemented |
+| 15 | File Uploader | Servlet Multipart config for banner images and receipts | Implemented |
+| 16 | Payment Gateway | Mock sandbox payment workflow supporting payment status transitions | Phase 03 Foundation Ready / Phase 04 |
 | 17 | Multimedia Elements | Audio preview player and teaser video containers for events | Foundation Ready |
 | 18 | SMTP Email | Jakarta Mail integration for async booking and ticket dispatches | Foundation Ready |
 | 19 | Uploading Mechanisms | Dedicated asset directories (`assets/images`, `assets/audio`, `assets/video`) | Implemented |

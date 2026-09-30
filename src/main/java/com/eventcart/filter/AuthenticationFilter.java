@@ -21,6 +21,7 @@ import java.util.List;
 @WebFilter(filterName = "AuthenticationFilter", urlPatterns = {
         "/profile/*",
         "/account/*",
+        "/checkout",
         "/checkout/*",
         "/bookings/*",
         "/my-tickets/*",

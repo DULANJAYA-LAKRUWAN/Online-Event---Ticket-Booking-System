@@ -31,5 +31,8 @@
         <mapping class="com.eventcart.entity.Category"/>
         <mapping class="com.eventcart.entity.Event"/>
         <mapping class="com.eventcart.entity.TicketType"/>
+        <mapping class="com.eventcart.entity.Booking"/>
+        <mapping class="com.eventcart.entity.BookingItem"/>
+        <mapping class="com.eventcart.entity.Payment"/>
     </session-factory>
 </hibernate-configuration>

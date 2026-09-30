@@ -14,4 +14,6 @@ public interface TicketTypeDao extends GenericDao<TicketType, Long> {
     List<TicketType> findActiveByEvent(Long eventId);
 
     boolean updateAvailableQuantity(Long ticketTypeId, int deltaQuantity);
+
+    java.util.Optional<TicketType> findByIdWithLock(org.hibernate.Session session, Long ticketTypeId);
 }

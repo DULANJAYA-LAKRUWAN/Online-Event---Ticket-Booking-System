@@ -66,4 +66,16 @@ public class TicketTypeDaoImpl extends GenericDaoImpl<TicketType, Long> implemen
             return true;
         });
     }
+
+    @Override
+    public java.util.Optional<TicketType> findByIdWithLock(Session session, Long ticketTypeId) {
+        if (ticketTypeId == null || session == null) return java.util.Optional.empty();
+        try {
+            TicketType ticket = session.get(TicketType.class, ticketTypeId, org.hibernate.LockMode.PESSIMISTIC_WRITE);
+            return java.util.Optional.ofNullable(ticket);
+        } catch (Exception e) {
+            logger.error("Error acquiring pessimistic write lock on ticket type {}: {}", ticketTypeId, e.getMessage(), e);
+            throw e;
+        }
+    }
 }

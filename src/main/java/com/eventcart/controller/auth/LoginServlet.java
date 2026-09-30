@@ -1,7 +1,6 @@
 package com.eventcart.controller.auth;
 
 import com.eventcart.controller.BaseServlet;
-import com.eventcart.dto.ApiResponse;
 import com.eventcart.entity.User;
 import com.eventcart.service.UserService;
 import com.eventcart.service.impl.UserServiceImpl;
