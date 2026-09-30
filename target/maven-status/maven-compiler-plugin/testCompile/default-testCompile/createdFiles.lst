@@ -1,2 +1,13 @@
+com\eventcart\service\EventServiceTest$MockEventDao.class
+com\eventcart\service\EventServiceTest$MockUserDao.class
+com\eventcart\service\TicketTypeServiceTest.class
+com\eventcart\util\FileUploadUtilTest.class
+com\eventcart\service\EventServiceTest$MockCategoryDao.class
+com\eventcart\service\EventServiceTest.class
+com\eventcart\service\CategoryServiceTest$MockCategoryDao.class
+com\eventcart\service\CategoryServiceTest.class
 com\eventcart\util\PasswordUtilTest.class
 com\eventcart\util\ValidationUtilTest.class
+com\eventcart\service\TicketTypeServiceTest$MockEventDao.class
+com\eventcart\util\FileUploadUtilTest$MockPart.class
+com\eventcart\service\TicketTypeServiceTest$MockTicketTypeDao.class

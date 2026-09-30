@@ -41,8 +41,13 @@ public class AdminAuthorizationFilter implements Filter {
             return;
         }
 
+        String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
+
         if (authUser.getRole() == Role.ADMIN) {
-            // Authorized administrator
+            // Full administrative privileges across all admin routes
+            chain.doFilter(request, response);
+        } else if (authUser.getRole() == Role.ORGANIZER && path.startsWith("/admin/events")) {
+            // Organizers are authorized to manage event listings and ticket tiers
             chain.doFilter(request, response);
         } else {
             // Insufficient permissions -> 403 Forbidden

@@ -231,9 +231,24 @@ For examiners and demonstration grading, default accounts are seeded in `databas
 - [x] Responsive Bootstrap 5 UI design system & layout fragments
 - [x] Full compilation and automated unit tests passing (`mvn clean package`)
 
-### Phase 02: Core Business Processes (Next Step)
-- Event management & organizer publishing workflow
-- Interactive advanced search & category filtering
-- Session-based Shopping Cart for ticket reservations
-- Mock Payment Gateway integration & booking confirmation
-- SMTP notification & E-ticket generation with QR code references
+### Phase 02: Event & Category Management (Completed)
+- [x] Category domain model, DAO, and Service with unique slug generator and status management
+- [x] Event domain model, DAO, and Service with publishing constraints and date/time validation
+- [x] TicketType domain model, DAO, and Service with inventory stock control
+- [x] Admin category management interface (`/admin/categories`) with AJAX status toggle
+- [x] Admin event listings interface (`/admin/events`) with quick status updates and actions
+- [x] Multipart event banner image uploader (`FileUploadUtil`) with 5MB cap and MIME/extension restrictions
+- [x] Admin ticket tiers management interface (`/admin/events/tickets`)
+- [x] Public customer event catalog (`/events`) with search, category filtering, and pagination
+- [x] Public event details page (`/event`) with rich metadata and prepared ticket tier selection
+- [x] Real database-backed `index.jsp` homepage with dynamic featured event showcase
+- [x] Database seed script (`database/eventcart.sql`) with 6 categories, 10 events, and multi-tier tickets
+- [x] 18 automated unit tests passing with zero failures
+
+### Phase 03: Ticket Shopping Cart & Booking Workflow (Next Step)
+- Session-based Ticket Shopping Cart (AJAX add/update/remove items)
+- Ticket inventory reservation locking mechanism
+- Multi-step checkout workflow with customer contact details
+- Mock / Sandbox Payment Gateway integration
+- Digital E-Ticket generation with cryptographic QR hash
+- SMTP confirmation email dispatching with Jakarta Mail

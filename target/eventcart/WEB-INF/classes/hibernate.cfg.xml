@@ -28,5 +28,8 @@
 
         <!-- Mapped entity classes -->
         <mapping class="com.eventcart.entity.User"/>
+        <mapping class="com.eventcart.entity.Category"/>
+        <mapping class="com.eventcart.entity.Event"/>
+        <mapping class="com.eventcart.entity.TicketType"/>
     </session-factory>
 </hibernate-configuration>
