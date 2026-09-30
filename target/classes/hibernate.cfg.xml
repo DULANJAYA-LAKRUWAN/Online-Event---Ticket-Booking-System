@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/eventcart_db?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC&amp;characterEncoding=UTF-8</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password"></property>
+
+        <!-- JDBC connection pool (use built-in for development) -->
+        <property name="connection.pool_size">10</property>
+
+        <!-- SQL dialect for MySQL 8 -->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">false</property>
+        <property name="format_sql">true</property>
+
+        <!-- Enable Hibernate's automatic session context management -->
+        <property name="current_session_context_class">thread</property>
+
+        <!-- Update the database schema on startup -->
+        <property name="hbm2ddl.auto">update</property>
+
+        <!-- Mapped entity classes -->
+        <mapping class="com.eventcart.entity.User"/>
+    </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,50 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
+<%-- Flash Success Messages --%>
+<c:if test="${not empty sessionScope.flash_success}">
+    <div class="alert alert-success alert-dismissible fade show shadow-sm border-0 my-3" role="alert">
+        <i class="bi bi-check-circle-fill me-2 fs-5 align-middle"></i>
+        <span><c:out value="${sessionScope.flash_success}" /></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <c:remove var="flash_success" scope="session" />
+</c:if>
+
+<%-- Flash Error Messages --%>
+<c:if test="${not empty sessionScope.flash_error}">
+    <div class="alert alert-danger alert-dismissible fade show shadow-sm border-0 my-3" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2 fs-5 align-middle"></i>
+        <span><c:out value="${sessionScope.flash_error}" /></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <c:remove var="flash_error" scope="session" />
+</c:if>
+
+<%-- Flash Warning Messages --%>
+<c:if test="${not empty sessionScope.flash_warning}">
+    <div class="alert alert-warning alert-dismissible fade show shadow-sm border-0 my-3" role="alert">
+        <i class="bi bi-exclamation-circle-fill me-2 fs-5 align-middle"></i>
+        <span><c:out value="${sessionScope.flash_warning}" /></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <c:remove var="flash_warning" scope="session" />
+</c:if>
+
+<%-- Request-level Error Messages (e.g. from validation forwards) --%>
+<c:if test="${not empty requestScope.errorMessage}">
+    <div class="alert alert-danger alert-dismissible fade show shadow-sm border-0 my-3" role="alert">
+        <i class="bi bi-x-circle-fill me-2 fs-5 align-middle"></i>
+        <span><c:out value="${requestScope.errorMessage}" /></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</c:if>
+
+<%-- Request-level Success Messages --%>
+<c:if test="${not empty requestScope.successMessage}">
+    <div class="alert alert-success alert-dismissible fade show shadow-sm border-0 my-3" role="alert">
+        <i class="bi bi-check-circle-fill me-2 fs-5 align-middle"></i>
+        <span><c:out value="${requestScope.successMessage}" /></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</c:if>
